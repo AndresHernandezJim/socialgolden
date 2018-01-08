@@ -1,0 +1,52 @@
+
+img {
+	max-width: 100%;
+}
+
+.quitar-float{
+	float:none;
+}
+.espacio-arriba{
+	margin-top:100px;
+}
+.SpectralSC{
+font-family: 'SpectralSC', serif;
+}
+.se-gris{
+	background-color: #7D757E;
+}
+.padding-largo{
+	padding: 5px 10px;
+}
+.grande{
+	font-size: 4cm;
+}
+.mediano{
+	font-size: 2cm;
+}
+
+.azul{
+	color: #335EFF; 
+}
+.no-lista{
+	margin: 0px;
+	padding: 0px;
+}
+.inline-block{
+	float: none;
+	display: inline-block;
+}
+.no-lista li{
+   list-style-type: none;
+   
+}
+.retraso-1{
+	animation-delay: 1s;
+}
+
+.espacio-derecha{
+	margin-right: 0.5cm;
+}
+a,.azul{
+	color:#335EFF;
+}
