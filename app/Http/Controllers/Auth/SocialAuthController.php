@@ -24,10 +24,11 @@ class SocialAuthController extends Controller
     $social_user = Socialite::driver('Facebook')->user(); 
     //dd($social_user);
     $accesst=$social_user->token;
+    //$fb=Socialite::driver('Facebook');
     $fb= new Facebook([
-      'app_id'=>'153906365252447',
-      'app_secret'=>'b3b58e15e3b3532c315fac1ffffc2ef4',
-      'default_graph_version'=>'v2.10',
+      'app_id' => env('FACEBOOK_APP_ID', null),
+      'app_secret' => env('FACEBOOK_APP_SECRET', null),
+      'default_graph_version' => env('FACEBOOK_DEFAULT_GRAPH_VERSION', 'v2.10'),
     ]);
     $oAuth2Client=$fb->getOAuth2Client();
     $long_access_token = $oAuth2Client->getLongLivedAccessToken($accesst)->getValue();
@@ -132,9 +133,9 @@ class SocialAuthController extends Controller
     $usuario=$usuario->id;
     //dd($usuario);
     $fb= new Facebook([
-      'app_id'=>'153906365252447',
-      'app_secret'=>'b3b58e15e3b3532c315fac1ffffc2ef4',
-      'default_graph_version'=>'v2.10',
+     'app_id' => env('FACEBOOK_APP_ID', null),
+      'app_secret' => env('FACEBOOK_APP_SECRET', null),
+      'default_graph_version' => env('FACEBOOK_DEFAULT_GRAPH_VERSION', 'v2.10'),
     ]);
     if($request->donde==1){
       //perfil personal
@@ -293,9 +294,9 @@ class SocialAuthController extends Controller
   public function programarp(Request $request){
     //dd($request->all());
     $fb= new Facebook([
-      'app_id'=>'153906365252447',
-      'app_secret'=>'b3b58e15e3b3532c315fac1ffffc2ef4',
-      'default_graph_version'=>'v2.10',
+      'app_id' => env('FACEBOOK_APP_ID', null),
+      'app_secret' => env('FACEBOOK_APP_SECRET', null),
+      'default_graph_version' => env('FACEBOOK_DEFAULT_GRAPH_VERSION', 'v2.10'),
     ]);
     $idpag=\DB::table('paginas')->select('p_id')->where('id',$request->pagina)->first();
     $idpag=$idpag->p_id;
