@@ -40,13 +40,18 @@ class SocialAuthController extends Controller
       $user1=json_decode($user);
       $token=\DB::table('claves')->where('user_id','=',$user1->id)->update(['token'=>$long_access_token]);
       $response = $fb->get('/me/accounts');
-      //dd($response);
       foreach ($response->getDecodedBody() as $allAccounts) {
-        foreach ($allAccounts as $account ) { 
-          if(isset($account['id'])){
-            $pagina=\DB::table('paginas')->where('user_id','=',$user->id)->update(['token'=>$account['access_token']]);
+        $cantidad=sizeof($allAccounts);
+        if ($cantidad==0) {
+          $paginas=\DB::table('paginas')->where('user_id',$user->id)->delete();
+        }else{
+          foreach ($allAccounts as $account ) { 
+            if(isset($account['id'])){
+              $pagina=\DB::table('paginas')->where('user_id','=',$user->id)->update(['token'=>$account['access_token']]);
+            }
           }
         }
+    
       }
       return $this->authAndRedirect($user); // Login y redirección
     }

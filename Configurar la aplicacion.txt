@@ -1,0 +1,47 @@
+Configurar la aplicacion
+
+para poder configurar la aplicación es necesario incluir lo siguiente en el archivo .env al final del mismo
+
+FACEBOOK_APP_ID=153906365252447
+FACEBOOK_APP_SECRET=b3b58e15e3b3532c315fac1ffffc2ef4
+FACEBOOK_DEFAULT_GRAPH_VERSION=v2.8
+
+siendo los anteriores los datos que obtenemos de la aplicacion desarrollada en https://developers.facebook.com
+para que pruebes la funcionalidad puedes dejar los que estan descritos ya que son los que coinciden con la aplicacion que desarrolle
+
+
+en el archivo FacebookProvider.php ubicado en la ruta /vendor/laravel/socialite/src/two/ debes  reemplazar la variable $scopes con lo siguiente
+
+
+protected $scopes = ['email','public_profile','publish_actions','manage_pages', 'publish_pages'];
+
+lo que te permite adquirir permisos en facebook tanto para obtener informacion de tu perfil, permisos de publicacion y manejo de cuenta y de paginas que administres
+
+
+realizar las migraciones
+
+
+
+Configuraciones adicionales 
+
+
+Revisa el AppServiceProvider ubicado en /app/Providers y verifica que en el  metodo register se encuentren descritas las siguientes lineas
+
+$this->app->singleton(Facebook::class, function ($app) {
+            return new Facebook(config('facebook.config'));
+        });
+
+de igual forma que exista el archivo de configuracion (facebook.config), en la carpeta /config/, si no existe hay que crearlo y agregar lo siguiente
+
+<?php
+
+return [
+    'config' => [
+        'app_id' => env('FACEBOOK_APP_ID', null),
+        'app_secret' => env('FACEBOOK_APP_SECRET', null),
+        'default_graph_version' => env('FACEBOOK_DEFAULT_GRAPH_VERSION', 'v2.10'),
+    ],
+];
+
+
+Finalmente, ignora mi mal ordenamiento de programación y las cuachalotadas de las vistas, agarre una plantilla que me dio el wey que me pidio que lo ayudara
